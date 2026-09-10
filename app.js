@@ -15,8 +15,24 @@ function createCard(item) {
   const card = document.createElement("div");
   card.className = "card";
 
-  const top = document.createElement("div");
-  top.className = "card-top";
+  const left = document.createElement("div");
+  left.className = "card-left";
+
+  const leftIcons = document.createElement("div");
+  leftIcons.className = "card-left-icons";
+
+  for (let i = 0; i < 7; i++) {
+    const icon = document.createElement("span");
+    icon.className = "card-left-icon";
+    icon.setAttribute("aria-hidden", "true");
+    icon.innerHTML = item.icon || "&#9742;";
+    leftIcons.appendChild(icon);
+  }
+
+  left.appendChild(leftIcons);
+
+  const right = document.createElement("div");
+  right.className = "card-right";
 
   const icon = document.createElement("span");
   icon.className = "card-icon";
@@ -27,9 +43,6 @@ function createCard(item) {
   area.className = "card-area";
   area.textContent = item.area || "SIN ÁREA";
 
-  top.appendChild(icon);
-  top.appendChild(area);
-
   const ext = document.createElement("div");
   ext.className = "card-extension";
   ext.textContent = item.extension;
@@ -38,13 +51,16 @@ function createCard(item) {
   name.className = "card-name";
   name.textContent = item.name ? escapeHtml(item.name) : "SIN NOMBRE";
 
-  card.appendChild(top);
-  card.appendChild(ext);
-  card.appendChild(name);
+  right.appendChild(icon);
+  right.appendChild(area);
+  right.appendChild(ext);
+  right.appendChild(name);
 
   const card2 = document.createElement("div");
   card2.className = "card2";
 
+  card.appendChild(left);
+  card.appendChild(right);
   cardm.appendChild(card);
   cardm.appendChild(card2);
 
