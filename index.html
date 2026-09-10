@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Extensiones - Fe y Alegría Colombia</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Extensiones Telefónicas</h1>
+      <p class="subtitle">Oficina Nacional Fe y Alegría Colombia</p>
+    </header>
+
+    <div class="search-box">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Buscar por extensión, área o nombre..."
+        autocomplete="off"
+      />
+    </div>
+
+    <div class="table-wrapper">
+      <table id="extensionsTable">
+        <thead>
+          <tr>
+            <th>Extensión</th>
+            <th>Área</th>
+            <th>Nombre</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+      </table>
+      <p id="noResults" class="no-results" hidden>No se encontraron resultados.</p>
+    </div>
+
+    <footer>
+      <p>Consultar extensiones internas · Fe y Alegría Colombia</p>
+    </footer>
+  </div>
+
+  <script>
+    window.extensionsData = [
+      { extension: "1001", area: "Dirección Nacional", name: "Juan Pérez" },
+      { extension: "1002", area: "Recursos Humanos", name: "María Gómez" },
+      { extension: "1003", area: "Tecnología", name: "Carlos López" },
+      { extension: "1004", area: "Finanzas", name: "Ana Martínez" },
+      { extension: "1005", area: "Proyectos", name: "Luis Rodríguez" },
+      { extension: "1006", area: "Comunicaciones", name: "Patricia Sánchez" },
+      { extension: "1007", area: "Jurídica", name: "Andrés Ruiz" },
+      { extension: "1008", area: "Calidad", name: "Carolina Vargas" },
+      { extension: "1009", area: "Logística", name: "Diego Torres" },
+      { extension: "1010", area: "Administración", name: "Laura Muñoz" }
+    ];
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>
