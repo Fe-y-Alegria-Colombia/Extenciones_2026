@@ -15,46 +15,35 @@ function createCard(item) {
   const card = document.createElement("div");
   card.className = "card";
 
+  const top = document.createElement("div");
+  top.className = "card-top";
+
   const icon = document.createElement("span");
   icon.className = "card-icon";
   icon.setAttribute("aria-hidden", "true");
-  icon.innerHTML = "&#9742;";
+  icon.innerHTML = item.icon || "&#9742;";
 
   const area = document.createElement("div");
   area.className = "card-area";
   area.textContent = item.area || "SIN ÁREA";
 
-  card.appendChild(icon);
-  card.appendChild(area);
+  top.appendChild(icon);
+  top.appendChild(area);
+
+  const ext = document.createElement("div");
+  ext.className = "card-extension";
+  ext.textContent = item.extension;
+
+  const name = document.createElement("div");
+  name.className = "card-name";
+  name.textContent = item.name ? escapeHtml(item.name) : "SIN NOMBRE";
+
+  card.appendChild(top);
+  card.appendChild(ext);
+  card.appendChild(name);
 
   const card2 = document.createElement("div");
   card2.className = "card2";
-
-  const upper = document.createElement("div");
-  upper.className = "upper";
-
-  const nameText = document.createElement("div");
-  nameText.className = "nametext";
-  nameText.textContent = item.name || "SIN NOMBRE";
-
-  upper.appendChild(nameText);
-
-  const lower = document.createElement("div");
-  lower.className = "lower";
-
-  const extText = document.createElement("div");
-  extText.className = "exttext";
-  extText.textContent = item.extension;
-
-  const extLabel = document.createElement("div");
-  extLabel.className = "extlabel";
-  extLabel.textContent = "EXTENSIÓN";
-
-  lower.appendChild(extText);
-  lower.appendChild(extLabel);
-
-  card2.appendChild(upper);
-  card2.appendChild(lower);
 
   cardm.appendChild(card);
   cardm.appendChild(card2);
