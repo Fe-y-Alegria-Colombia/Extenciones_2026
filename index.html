@@ -4,37 +4,85 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Extensiones - Fe y Alegría Colombia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div class="bg-icons" aria-hidden="true">
+    <span class="bg-icon">&#9742;</span>
+    <span class="bg-icon">&#9993;</span>
+    <span class="bg-icon">&#9873;</span>
+    <span class="bg-icon">&#9742;</span>
+    <span class="bg-icon">&#9993;</span>
+    <span class="bg-icon">&#9873;</span>
+    <span class="bg-icon">&#9742;</span>
+    <span class="bg-icon">&#9993;</span>
+    <span class="bg-icon">&#9873;</span>
+    <span class="bg-icon">&#9742;</span>
+    <span class="bg-icon">&#9993;</span>
+    <span class="bg-icon">&#9873;</span>
+  </div>
+
   <div class="container">
-    <header>
-      <h1>Extensiones Telefónicas</h1>
-      <p class="subtitle">Oficina Nacional Fe y Alegría Colombia</p>
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon" aria-hidden="true">&#9733;</span>
+        <div class="logo-text">
+          <h1>Extensiones Telefónicas</h1>
+          <p class="subtitle">Oficina Nacional Fe y Alegría Colombia</p>
+        </div>
+      </div>
+      <div class="header-badge">2026</div>
     </header>
 
     <div class="search-box">
+      <span class="search-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+      </span>
       <input
         type="text"
         id="searchInput"
         placeholder="Buscar por extensión, área o nombre..."
         autocomplete="off"
       />
+      <kbd class="search-hint">ESC para limpiar</kbd>
     </div>
 
     <div class="table-wrapper">
       <table id="extensionsTable">
         <thead>
           <tr>
-            <th>Extensión</th>
-            <th>Área</th>
-            <th>Nombre</th>
+            <th>
+              <span class="th-content">
+                <span class="th-icon" aria-hidden="true">&#9742;</span>
+                Extensión
+              </span>
+            </th>
+            <th>
+              <span class="th-content">
+                <span class="th-icon" aria-hidden="true">&#9873;</span>
+                Área
+              </span>
+            </th>
+            <th>
+              <span class="th-content">
+                <span class="th-icon" aria-hidden="true">&#9786;</span>
+                Nombre
+              </span>
+            </th>
           </tr>
         </thead>
-        <tbody id="tableBody">
-        </tbody>
+        <tbody id="tableBody"></tbody>
       </table>
-      <p id="noResults" class="no-results" hidden>No se encontraron resultados.</p>
+      <p id="noResults" class="no-results" hidden>
+        <span class="no-results-icon" aria-hidden="true">&#128269;</span>
+        No se encontraron resultados
+      </p>
     </div>
 
     <footer>

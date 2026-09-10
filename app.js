@@ -2,6 +2,12 @@ const tableBody = document.getElementById("tableBody");
 const searchInput = document.getElementById("searchInput");
 const noResults = document.getElementById("noResults");
 
+function escapeHtml(text) {
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
+}
+
 function renderTable(data) {
   tableBody.innerHTML = "";
 
@@ -12,8 +18,9 @@ function renderTable(data) {
 
   noResults.hidden = true;
 
-  data.forEach((item) => {
+  data.forEach((item, index) => {
     const row = document.createElement("tr");
+    row.style.animationDelay = `${index * 0.04}s`;
     row.innerHTML = `
       <td>${escapeHtml(item.extension)}</td>
       <td>${escapeHtml(item.area)}</td>
@@ -21,12 +28,6 @@ function renderTable(data) {
     `;
     tableBody.appendChild(row);
   });
-}
-
-function escapeHtml(text) {
-  const div = document.createElement("div");
-  div.textContent = text;
-  return div.innerHTML;
 }
 
 function filterExtensions(query) {
@@ -48,6 +49,14 @@ function filterExtensions(query) {
 searchInput.addEventListener("input", () => {
   const filtered = filterExtensions(searchInput.value);
   renderTable(filtered);
+});
+
+searchInput.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    searchInput.value = "";
+    renderTable(window.extensionsData || []);
+    searchInput.blur();
+  }
 });
 
 renderTable(window.extensionsData || []);
