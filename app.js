@@ -61,7 +61,7 @@ function createCard(item) {
   } else {
     const badge = document.createElement("span");
     badge.className = "nac-badge";
-    badge.textContent = "NAC. BOGOTA";
+    badge.textContent = "OFICINA NACIONAL";
     right.appendChild(badge);
   }
 
