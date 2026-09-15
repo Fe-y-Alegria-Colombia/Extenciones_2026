@@ -425,6 +425,19 @@ body {
   box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
 }
 
+.nac-badge {
+  align-self: flex-start;
+  padding: 4px 10px;
+  background: var(--red-500);
+  color: var(--white);
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(200, 16, 46, 0.25);
+}
+
 .no-results {
   display: flex;
   align-items: center;
