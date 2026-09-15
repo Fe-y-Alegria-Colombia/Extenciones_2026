@@ -56,7 +56,7 @@ function createCard(item) {
   if (item.regional) {
     const badge = document.createElement("span");
     badge.className = "regional-badge";
-    badge.textContent = "REG. BOGOTÁ";
+    badge.textContent = "NAC. BOGOTA";
     right.appendChild(badge);
   }
 
@@ -108,7 +108,7 @@ function renderCards(data) {
   });
 
   if (regionalItems.length > 0) {
-    const sectionTitle = createSectionTitle("Regional Bogotá", index * 0.04);
+    const sectionTitle = createSectionTitle("NAC. BOGOTÁ", index * 0.04);
     cardsContainer.appendChild(sectionTitle);
     index++;
 
