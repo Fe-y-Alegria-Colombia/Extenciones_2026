@@ -161,13 +161,29 @@ renderCards(window.extensionsData || []);
 (function initEyeTracking() {
   const svg = document.querySelector("svg.side-blob-img");
   const track = document.getElementById("eyeTrack");
-  if (!svg || !track) return;
+  const eyes = document.getElementById("eyeScale");
+  if (!svg || !track || !eyes) return;
 
   const MAX = 26;
+  const EYE_CX = -26;
+  const EYE_CY = 20;
+  const DEG = Math.PI / 180;
+
+  const EXPR = {
+    neutral: { sx: 1, sy: 1, rot: 0 },
+    curious: { sx: 1.4, sy: 1.4, rot: 0 },
+    happy: { sx: 1.22, sy: 0.78, rot: 0 },
+    sad: { sx: 1.5, sy: 0.38, rot: -8 },
+  };
+
+  let expression = "neutral";
   let targetX = 0;
   let targetY = 0;
   let curX = 0;
   let curY = 0;
+  let v = { sx: 1, sy: 1, rot: 0 };
+
+  track.removeAttribute("transform");
 
   window.addEventListener("pointermove", (event) => {
     const rect = svg.getBoundingClientRect();
@@ -185,10 +201,56 @@ renderCards(window.extensionsData || []);
     targetY = 0;
   });
 
+  function setExpression(name) {
+    if (EXPR[name]) expression = name;
+  }
+
+  searchInput.addEventListener("focus", () => {
+    const term = searchInput.value.trim();
+    setExpression(term ? "happy" : "curious");
+  });
+
+  searchInput.addEventListener("blur", () => {
+    const term = searchInput.value.trim();
+    setExpression(term && filterExtensions(term).length ? "happy" : "neutral");
+  });
+
+  searchInput.addEventListener("input", () => {
+    const term = searchInput.value.trim();
+    if (!term) {
+      setExpression("neutral");
+      return;
+    }
+    setExpression(filterExtensions(term).length ? "happy" : "sad");
+  });
+
+  searchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setExpression("neutral");
+  });
+
   function tick() {
+    const k = 0.14;
     curX += (targetX - curX) * 0.12;
     curY += (targetY - curY) * 0.12;
-    track.setAttribute("transform", `translate(${curX.toFixed(3)} ${curY.toFixed(3)})`);
+
+    const t = EXPR[expression];
+    v.sx += (t.sx - v.sx) * k;
+    v.sy += (t.sy - v.sy) * k;
+    v.rot += (t.rot - v.rot) * k;
+
+    const a = v.rot * DEG;
+    const sa = Math.sin(a);
+    const ca = Math.cos(a);
+    const qx = EYE_CX * (v.sx - 1);
+    const qy = EYE_CY * (v.sy - 1);
+    const tx = curX - (ca * qx - sa * qy);
+    const ty = curY - (sa * qx + ca * qy);
+
+    eyes.setAttribute(
+      "transform",
+      `translate(${tx.toFixed(3)} ${ty.toFixed(3)}) rotate(${v.rot.toFixed(2)} ${EYE_CX} ${EYE_CY}) scale(${v.sx.toFixed(3)} ${v.sy.toFixed(3)})`
+    );
+
     requestAnimationFrame(tick);
   }
 
