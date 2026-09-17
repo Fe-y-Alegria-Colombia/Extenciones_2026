@@ -208,6 +208,34 @@ body {
   animation: fadeUp 0.55s ease-out;
 }
 
+.layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  margin-top: 24px;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+.side-blob {
+  width: 380px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 24px;
+  animation: fadeUp 0.8s ease-out 0.15s both;
+}
+
+.side-blob-img {
+  display: block;
+  width: 200%;
+  max-width: none;
+  height: auto;
+  filter: drop-shadow(0 16px 36px rgb(0 0 0 / 0.16));
+}
+
 .cardm {
   position: relative;
   display: flex;
@@ -474,6 +502,25 @@ footer {
 @keyframes rowIn {
   from { opacity: 0; transform: translateX(-8px); }
   to { opacity: 1; transform: translateX(0); }
+}
+
+@media (max-width: 1020px) {
+  .layout {
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .side-blob {
+    width: 100%;
+    position: static;
+    display: flex;
+    justify-content: center;
+    padding-top: 8px;
+  }
+
+  .side-blob-img {
+    width: 280px;
+  }
 }
 
 @media (max-width: 640px) {

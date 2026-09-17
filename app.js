@@ -157,3 +157,40 @@ searchInput.addEventListener("keydown", (event) => {
 });
 
 renderCards(window.extensionsData || []);
+
+(function initEyeTracking() {
+  const svg = document.querySelector("svg.side-blob-img");
+  const track = document.getElementById("eyeTrack");
+  if (!svg || !track) return;
+
+  const MAX = 26;
+  let targetX = 0;
+  let targetY = 0;
+  let curX = 0;
+  let curY = 0;
+
+  window.addEventListener("pointermove", (event) => {
+    const rect = svg.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const half = Math.max(rect.width / 2, 1);
+    const nx = Math.max(-1, Math.min(1, (event.clientX - cx) / half));
+    const ny = Math.max(-1, Math.min(1, (event.clientY - cy) / half));
+    targetX = nx * MAX;
+    targetY = ny * MAX;
+  });
+
+  document.addEventListener("mouseleave", () => {
+    targetX = 0;
+    targetY = 0;
+  });
+
+  function tick() {
+    curX += (targetX - curX) * 0.12;
+    curY += (targetY - curY) * 0.12;
+    track.setAttribute("transform", `translate(${curX.toFixed(3)} ${curY.toFixed(3)})`);
+    requestAnimationFrame(tick);
+  }
+
+  tick();
+})();
